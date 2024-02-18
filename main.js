@@ -1,6 +1,10 @@
+// Score zeigt den Stand der richtig beantworteten Fragen an
 let score = 0;
+
+// currentQuestionIndex welche Frage ist aktuell
 let currentQuestionIndex = 0;
 
+// Fragen, Antworten und Inhalte
 let questions = [
   {
     question: "Was ist die Hauptstadt von Deutschland?",
@@ -52,20 +56,43 @@ let questions = [
   },
 ];
 
+// HTML Elemente
 let answersDiv = document.getElementById("answers");
 let answerButton = document.querySelector(".answer-button");
 let checkResult = document.querySelector(".check-result");
 
-function displayQuestion() {
+ // Zeigt das Resultat an, wenn alle Fragen beantwortet sind
+function outputResult() {
   if (currentQuestionIndex >= questions.length) {
     document.getElementById("quiz-container").hidden = true;
     document.getElementById("result").hidden = false;
-    document.getElementById(
-      "score"
-    ).textContent = `Du hast ${score} von 8 möglichen Punkten erhalten`;
-    return;
   }
 
+  // Zeigt das Resultat an inkl. Bewertung zum Score
+  if (currentQuestionIndex >= questions.length && score <= 3) {
+    document.getElementById(
+      "score"
+    ).textContent = `Du hast ${score} von 8 möglichen Punkten erhalten, du musst noch üben`;
+    return;
+  } else if (currentQuestionIndex >= questions.length && score <= 5) {
+    document.getElementById(
+      "score"
+    ).textContent = `Du hast ${score} von 8 möglichen Punkten erhalten, das sieht gut aus`;
+    return;
+  } else if (currentQuestionIndex >= questions.length && score > 5) {
+    document.getElementById(
+      "score"
+    ).textContent = `Du hast ${score} von 8 möglichen Punkten erhalten, du bist ein Profi`;
+    return;
+  }
+}
+
+// Zeigt die Fragen an und zum Schluss das Resultat
+function displayQuestion() {
+  // Zeigt das Resultat an
+  outputResult();
+ 
+  // Zeigt die Fragen mit Buttons im HTML an und überprüft durch die function "checkAnswer" das Ergebnis
   let question = questions[currentQuestionIndex];
 
   document.getElementById("question").textContent = question.question;
@@ -81,6 +108,7 @@ function displayQuestion() {
 }
 displayQuestion();
 
+// Prüft die Antwort auf Richtigkeit
 function checkAnswer(userAnswer) {
   let correctAnswer = questions[currentQuestionIndex].correctAnswer;
   let imgSrc = questions[currentQuestionIndex].img;
@@ -91,15 +119,17 @@ function checkAnswer(userAnswer) {
     checkResult.innerHTML = ` <img style="max-width: 50%; max-height: 70%" src='${imgSrc}' alt='Bild'>
     <h2> Super! ${correctAnswerOutput} ist richtig </h2>
     `;
+    // Errorhandling
     answersDiv.hidden = true;
   } else {
     checkResult.innerHTML = ` <img style="max-width: 50%; max-height: 70%" src='${imgSrc}' alt='Bild'>
     <h2> Das ist leider falsch! ${correctAnswerOutput} ist richtig </h2>
     `;
+    // Errorhandling
     answersDiv.hidden = true;
   }
 }
-
+// Zeigt die nächste Frage an und zählt den currentQuestionIndex hoch
 function nextQuestion() {
   checkResult.innerHTML = "";
   answersDiv.hidden = false;
