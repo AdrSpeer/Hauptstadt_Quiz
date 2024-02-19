@@ -37,19 +37,19 @@ let questions = [
     img: "assets/img/buenos.jpg",
   },
   {
-    question: "Was ist die Hauotstadt von Brasilien?",
+    question: "Was ist die Hauptstadt von Brasilien?",
     answers: ["Rio de Janeiro", "Bahia", "Brasilia", "Santos"],
     correctAnswer: 2,
     img: "assets/img/brasilia.jpg",
   },
   {
-    question: "Was ist die Hauotstadt von Marokko?",
+    question: "Was ist die Hauptstadt von Marokko?",
     answers: ["Marrakesch", "Rabat", "Casablanca", "Fes"],
     correctAnswer: 1,
     img: "assets/img/rabat.jpg",
   },
   {
-    question: "Was ist die Hauotstadt von Südafrika?",
+    question: "Was ist die Hauptstadt von Südafrika?",
     answers: ["Kapstadt", "Johannesburg", "Durban", "Pretoria"],
     correctAnswer: 3,
     img: "assets/img/pretoria.jpg",
@@ -61,7 +61,7 @@ let answersDiv = document.getElementById("answers");
 let answerButton = document.querySelector(".answer-button");
 let checkResult = document.querySelector(".check-result");
 
- // Zeigt das Resultat an, wenn alle Fragen beantwortet sind
+// Zeigt das Resultat an, wenn alle Fragen beantwortet sind
 function outputResult() {
   if (currentQuestionIndex >= questions.length) {
     document.getElementById("quiz-container").hidden = true;
@@ -91,7 +91,7 @@ function outputResult() {
 function displayQuestion() {
   // Zeigt das Resultat an
   outputResult();
- 
+
   // Zeigt die Fragen mit Buttons im HTML an und überprüft durch die function "checkAnswer" das Ergebnis
   let question = questions[currentQuestionIndex];
 
